@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Axler 3.51 — Matrix multiplication as linear combinations</title>
+<style>
+  :root{
+    --bg:#f7f8fb;
+    --card:#ffffff;
+    --text:#17191f;
+    --muted:#6b7280;
+    --line:#d9dee8;
+    --accent:#2563eb;
+    --accent2:#7c3aed;
+    --good:#0f766e;
+    --hl1:#dbeafe;
+    --hl2:#ede9fe;
+    --hl3:#dcfce7;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:var(--bg);color:var(--text)}
+  .wrap{max-width:1180px;margin:0 auto;padding:28px 18px 48px}
+  h1{font-size:28px;margin:0 0 8px}.sub{color:var(--muted);margin-bottom:22px;line-height:1.5}
+  .toolbar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:18px}
+  button,select{border:1px solid var(--line);background:#fff;border-radius:10px;padding:9px 12px;font-size:14px;cursor:pointer}
+  button:hover{border-color:#aeb7c8}.toggle{display:flex;gap:8px}.toggle button.active{background:var(--text);color:#fff;border-color:var(--text)}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}@media(max-width:900px){.grid{grid-template-columns:1fr}}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px;box-shadow:0 2px 10px rgba(17,24,39,.04)}
+  .card h2{font-size:18px;margin:0 0 12px}.mat-row{display:flex;align-items:center;gap:12px;flex-wrap:wrap}.label{font-weight:700;min-width:28px}
+  .matrix{display:grid;gap:5px;padding:10px 14px;position:relative}.matrix::before,.matrix::after{content:"";position:absolute;top:3px;bottom:3px;width:8px}
+  .matrix::before{left:2px;border-left:2px solid #111;border-top:2px solid #111;border-bottom:2px solid #111}.matrix::after{right:2px;border-right:2px solid #111;border-top:2px solid #111;border-bottom:2px solid #111}
+  .cell{width:54px;height:38px;border:1px solid var(--line);border-radius:8px;text-align:center;font-size:16px;background:#fff}.cell:focus{outline:2px solid #93c5fd;border-color:#60a5fa}
+  .readonly{display:flex;align-items:center;justify-content:center;width:54px;height:38px;border-radius:8px;background:#f9fafb;border:1px solid #eef1f5;font-variant-numeric:tabular-nums}
+  .hl-col{background:var(--hl1)!important}.hl-row{background:var(--hl2)!important}.hl-coef{background:var(--hl3)!important}
+  .eqbox{margin-top:16px;padding:14px;border-radius:12px;background:#f8fafc;border:1px solid var(--line);overflow:auto}.equation{font-family:"Times New Roman",serif;font-size:22px;line-height:1.5;white-space:nowrap}
+  .tiny{font-size:13px;color:var(--muted);margin-top:8px;line-height:1.45}.legend{display:flex;gap:14px;flex-wrap:wrap;margin-top:10px;color:#4b5563;font-size:13px}.dot{display:inline-block;width:12px;height:12px;border-radius:3px;margin-right:5px;vertical-align:-1px}
+  .insight{margin-top:18px;background:#111827;color:#fff;border-radius:16px;padding:18px}.insight strong{color:#bfdbfe}
+  .vector{display:inline-grid;grid-auto-flow:row;gap:2px;vertical-align:middle;padding:0 8px;position:relative;margin:0 4px}.vector::before,.vector::after{content:"";position:absolute;top:0;bottom:0;width:6px}
+  .vector::before{left:0;border-left:1.5px solid currentColor;border-top:1.5px solid currentColor;border-bottom:1.5px solid currentColor}.vector::after{right:0;border-right:1.5px solid currentColor;border-top:1.5px solid currentColor;border-bottom:1.5px solid currentColor}
+  .vecnum{text-align:center;min-width:20px}.step{margin-top:12px;padding:12px 14px;background:#fff;border:1px solid var(--line);border-radius:12px;color:#374151;line-height:1.5}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Axler 3.51 — умножение матриц как линейные комбинации</h1>
+  <div class="sub">Здесь фиксированы размеры <b>C ∈ F<sup>3×2</sup></b> и <b>R ∈ F<sup>2×3</sup></b>. Меняй элементы матриц и переключай взгляд: по <b>столбцам</b> или по <b>строкам</b>.</div>
+  <div class="toolbar"><div class="toggle"><button id="modeCol" class="active">3.51(a): столбцы</button><button id="modeRow">3.51(b): строки</button></div><button id="randomBtn">Случайные числа</button><button id="resetBtn">Пример по умолчанию</button><span id="selectorWrap"></span></div>
+  <div class="grid">
+    <div class="card"><h2>Исходные матрицы</h2><div class="mat-row"><div class="label">C =</div><div id="C" class="matrix"></div><div style="font-size:24px">·</div><div class="label">R =</div><div id="R" class="matrix"></div></div><div class="legend"><span><span class="dot" style="background:var(--hl1)"></span>выбранный столбец</span><span><span class="dot" style="background:var(--hl2)"></span>выбранная строка</span><span><span class="dot" style="background:var(--hl3)"></span>коэффициенты линейной комбинации</span></div></div>
+    <div class="card"><h2>Произведение P = CR</h2><div class="mat-row"><div class="label">P =</div><div id="P" class="matrix"></div></div><div class="tiny">P пересчитывается автоматически после каждого изменения C или R.</div></div>
+  </div>
+  <div class="card" style="margin-top:18px"><h2 id="viewTitle">3.51(a): выбранный столбец произведения</h2><div id="eqbox" class="eqbox"></div><div id="steps"></div></div>
+  <div class="insight"><div id="insightText"></div></div>
+</div>
+<script>
+const C0=[[1,2],[3,4],[5,6]];const R0=[[2,-1,3],[4,5,1]];let mode="col";let selected=0;
+const CEl=document.getElementById("C"),REl=document.getElementById("R"),PEl=document.getElementById("P"),selectorWrap=document.getElementById("selectorWrap");
+function makeEditableMatrix(container,rows,cols,values,prefix){container.innerHTML="";container.style.gridTemplateColumns=`repeat(${cols},54px)`;for(let i=0;i<rows;i++)for(let j=0;j<cols;j++){const input=document.createElement("input");input.type="number";input.step="1";input.className="cell";input.value=values[i][j];input.dataset.i=i;input.dataset.j=j;input.dataset.prefix=prefix;input.addEventListener("input",renderAll);container.appendChild(input)}}
+function readMatrix(container,rows,cols){const a=Array.from({length:rows},()=>Array(cols).fill(0));[...container.children].forEach(el=>{a[+el.dataset.i][+el.dataset.j]=Number(el.value||0)});return a}
+function multiply(A,B){const m=A.length,n=A[0].length,p=B[0].length;const out=Array.from({length:m},()=>Array(p).fill(0));for(let i=0;i<m;i++)for(let k=0;k<p;k++)for(let t=0;t<n;t++)out[i][k]+=A[i][t]*B[t][k];return out}
+function renderReadonlyMatrix(container,A){container.innerHTML="";container.style.gridTemplateColumns=`repeat(${A[0].length},54px)`;for(let i=0;i<A.length;i++)for(let j=0;j<A[0].length;j++){const d=document.createElement("div");d.className="readonly";d.textContent=fmt(A[i][j]);d.dataset.i=i;d.dataset.j=j;container.appendChild(d)}}
+function fmt(x){return Number.isInteger(x)?x:x.toFixed(2)}
+function vec(v){return `<span class="vector">${v.map(x=>`<span class="vecnum">${fmt(x)}</span>`).join("")}</span>`}
+function rowvec(v){return `[ ${v.map(fmt).join(" &nbsp; ")} ]`}
+function setHighlights(){[...CEl.children,...REl.children,...PEl.children].forEach(el=>el.classList.remove("hl-col","hl-row","hl-coef"));if(mode==="col"){[...REl.children].forEach(el=>{if(+el.dataset.j===selected)el.classList.add("hl-coef")});[...PEl.children].forEach(el=>{if(+el.dataset.j===selected)el.classList.add("hl-col")});[...CEl.children].forEach(el=>el.classList.add("hl-col"))}else{[...CEl.children].forEach(el=>{if(+el.dataset.i===selected)el.classList.add("hl-coef")});[...PEl.children].forEach(el=>{if(+el.dataset.i===selected)el.classList.add("hl-row")});[...REl.children].forEach(el=>el.classList.add("hl-row"))}}
+function renderSelector(){selectorWrap.innerHTML="";const label=document.createElement("label");label.style.fontSize="14px";label.style.color="#4b5563";label.textContent=mode==="col"?"Выбрать k: ":"Выбрать j: ";const sel=document.createElement("select");for(let i=0;i<3;i++){const opt=document.createElement("option");opt.value=i;opt.textContent=i+1;if(i===selected)opt.selected=true;sel.appendChild(opt)}sel.addEventListener("change",()=>{selected=+sel.value;renderAll()});label.appendChild(sel);selectorWrap.appendChild(label)}
+function renderExplanation(C,R,P){const eqbox=document.getElementById("eqbox"),steps=document.getElementById("steps"),title=document.getElementById("viewTitle"),insight=document.getElementById("insightText");if(mode==="col"){title.textContent="3.51(a): column k of CR is a linear combination of columns of C";const k=selected,c1=C.map(r=>r[0]),c2=C.map(r=>r[1]),rk=[R[0][k],R[1][k]],pk=P.map(r=>r[k]);eqbox.innerHTML=`<div class="equation">(CR)<sub>·,${k+1}</sub> = ${fmt(rk[0])} C<sub>·,1</sub> + ${fmt(rk[1])} C<sub>·,2</sub> = ${fmt(rk[0])}${vec(c1)} + ${fmt(rk[1])}${vec(c2)} = ${vec(pk)}</div>`;steps.innerHTML=`<div class="step">Коэффициенты <b>${fmt(rk[0])}</b> и <b>${fmt(rk[1])}</b> — это именно элементы <b>${k+1}-го столбца R</b>. А складываем мы <b>столбцы C</b>.</div>`;insight.innerHTML=`<strong>Смысл 3.51(a):</strong> каждый столбец произведения <b>CR</b> живёт в span столбцов <b>C</b>. Матрица <b>R</b> не создаёт новый тип столбцов — она только говорит, <em>с какими коэффициентами смешать столбцы C</em>.`}else{title.textContent="3.51(b): row j of CR is a linear combination of rows of R";const j=selected,r1=R[0].slice(),r2=R[1].slice(),cj=[C[j][0],C[j][1]],pj=P[j].slice();eqbox.innerHTML=`<div class="equation">(CR)<sub>${j+1},·</sub> = ${fmt(cj[0])} R<sub>1,·</sub> + ${fmt(cj[1])} R<sub>2,·</sub> = ${fmt(cj[0])}${rowvec(r1)} + ${fmt(cj[1])}${rowvec(r2)} = ${rowvec(pj)}</div>`;steps.innerHTML=`<div class="step">Коэффициенты <b>${fmt(cj[0])}</b> и <b>${fmt(cj[1])}</b> — это элементы <b>${j+1}-й строки C</b>. А складываем мы <b>строки R</b>.</div>`;insight.innerHTML=`<strong>Смысл 3.51(b):</strong> каждая строка произведения <b>CR</b> лежит в span строк <b>R</b>. Теперь <b>C</b> задаёт коэффициенты, с которыми смешиваются строки <b>R</b>.`}}
+function renderAll(){const C=readMatrix(CEl,3,2),R=readMatrix(REl,2,3),P=multiply(C,R);renderReadonlyMatrix(PEl,P);renderSelector();setHighlights();renderExplanation(C,R,P)}
+function reset(){makeEditableMatrix(CEl,3,2,C0,"C");makeEditableMatrix(REl,2,3,R0,"R");selected=0;renderAll()}
+function randomize(){function ri(){return Math.floor(Math.random()*9)-4}const C=Array.from({length:3},()=>Array.from({length:2},ri)),R=Array.from({length:2},()=>Array.from({length:3},ri));makeEditableMatrix(CEl,3,2,C,"C");makeEditableMatrix(REl,2,3,R,"R");renderAll()}
+document.getElementById("modeCol").onclick=()=>{mode="col";selected=0;document.getElementById("modeCol").classList.add("active");document.getElementById("modeRow").classList.remove("active");renderAll()};document.getElementById("modeRow").onclick=()=>{mode="row";selected=0;document.getElementById("modeRow").classList.add("active");document.getElementById("modeCol").classList.remove("active");renderAll()};document.getElementById("randomBtn").onclick=randomize;document.getElementById("resetBtn").onclick=reset;reset();
+</script>
+</body>
+</html>
