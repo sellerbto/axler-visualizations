@@ -89,6 +89,32 @@ Prefer this order:
 
 If the page needs a long paragraph before the user knows what to look at, redesign the visualization.
 
+## Site architecture
+
+Treat the repository as a growing library, not a single-page demo.
+
+- Keep the root `index.html` as the visualization menu.
+- Put each visualization in its own folder, e.g. `/3-51/index.html`, `/change-of-basis/index.html`.
+- Every visualization page should have a clear link back to the menu.
+- Add new entries to the menu as the library grows.
+- Keep the same visual language across pages, but let the mathematical structure determine the interaction.
+
+## Bilingual support
+
+Every public page should support both English and Russian.
+
+- Prefer one page with an `en` / `ru` string dictionary over duplicated HTML files.
+- Use `?lang=en` and `?lang=ru` in links so language survives navigation.
+- If no language is specified, use the browser language as a default.
+- Keep mathematical notation identical across translations unless terminology requires a change.
+- Translate the interface and explanation, not the symbols.
+
+## Repository workflow
+
+When working on this project, make requested site changes directly in the GitHub repository rather than leaving the result only as a local artifact.
+
+After writes, re-read the affected files to verify that the expected version is present on `main`.
+
 ## Quality check
 
 Before shipping, ask:
@@ -100,6 +126,8 @@ Before shipping, ask:
 - Could any paragraph be replaced by a visual relation?
 - Does the page look more like an explorable textbook figure than a SaaS dashboard?
 - Does it still work on mobile?
+- Is the page reachable from the main menu?
+- Do both RU and EN versions work and preserve language when navigating?
 
 ## Reference influences
 
