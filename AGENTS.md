@@ -8,9 +8,19 @@ This repository is a growing library of interactive visualizations for Sheldon A
 
 The goal is not to build a general-purpose app. Each visualization should isolate one mathematical idea and make its mechanism directly explorable.
 
-For visualization design principles, also read:
+## Agent / ChatGPT entrypoints
+
+For agents that support reusable skills, the project bootstrap skill is:
+
+`skills/axler-visualizations/SKILL.md`
+
+That skill should route the agent back to the current repository instructions instead of relying on stale embedded project context.
+
+For visualization design principles, read:
 
 `skills/math-visualization/SKILL.md`
+
+The current `AGENTS.md` and `skills/math-visualization/SKILL.md` are the source of truth for project work.
 
 ## Repository structure
 
@@ -21,6 +31,8 @@ Keep the repository organized as a small static site for GitHub Pages.
 ├── index.html                      # main visualization menu
 ├── AGENTS.md                       # repository/workflow instructions
 ├── skills/
+│   ├── axler-visualizations/
+│   │   └── SKILL.md                # ChatGPT/agent project bootstrap skill
 │   └── math-visualization/
 │       └── SKILL.md                # visualization design guidance
 ├── 3-51/
