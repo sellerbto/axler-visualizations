@@ -30,7 +30,7 @@ Keep the repository organized as a small static site for GitHub Pages.
 /
 ├── index.html                      # main visualization menu
 ├── AGENTS.md                       # repository/workflow instructions
-├── social-previews.json            # source data for generated social previews
+├── social-previews.json            # theorem number/title source data
 ├── scripts/
 │   └── generate_social_previews.py # generic 1200×630 preview renderer
 ├── assets/
@@ -64,29 +64,34 @@ Rules:
 
 ## Adding a new visualization
 
-When adding a visualization:
+When adding a numbered Axler visualization:
 
 1. Create a new folder with its own `index.html`.
 2. Follow `skills/math-visualization/SKILL.md` when designing the interaction.
 3. Add the visualization to the root menu.
 4. Add both English and Russian interface copy.
-5. Add one entry to `social-previews.json` with the strict fields `path`, `image`, `label`, `title`, and `subtitle`.
+5. Add one entry to `social-previews.json` containing only `number` and `title`.
 6. Add a back link to the root menu.
 7. Preserve the selected language when navigating between the menu and the visualization.
 8. Re-read all changed files after writing them and verify the expected version is on `main`.
 
-A new visualization is not complete until it is reachable from the root menu and represented in `social-previews.json`.
+The preview generator derives the folder path, image filename, and `AXLER <number>` label from the theorem number. For example, `3.84` maps to `3-84/index.html` and `assets/social/3-84.png`.
+
+A new numbered visualization is not complete until it is reachable from the root menu and represented in `social-previews.json`.
 
 ## Social previews
 
 Social preview PNGs are generated artifacts, not hand-designed per-page files.
 
 - Do not manually edit or upload files in `assets/social/`.
-- `social-previews.json` is the only page-specific input to the preview renderer.
-- Keep preview entries declarative: `path`, `image`, `label`, `title`, and `subtitle` only.
-- `scripts/generate_social_previews.py` must use one generic layout for every page; do not add theorem-specific rendering branches or hard-coded theorem lists.
+- For theorem pages, `social-previews.json` contains exactly two page-specific fields: `number` and `title`.
+- Do not add subtitles, paths, image names, labels, layout hints, or theorem-specific drawing data to the config.
+- The homepage preview is fixed site chrome and is generated automatically; it has no config entry.
+- `scripts/generate_social_previews.py` derives theorem paths, image filenames, and labels from `number` and uses one generic layout for every page.
+- The renderer keeps variable title text in a fixed safe region separate from the decorative motif and footer. It automatically reduces title size to fit and fails CI instead of producing an overlapping image if a title cannot fit.
+- Do not add theorem-specific rendering branches or hard-coded theorem lists to the renderer.
 - `.github/workflows/social-previews.yml` regenerates previews on `main` and commits changed PNGs with `github-actions[bot]`.
-- The generator validates that every public page exposing `og:image` has a matching config entry and that the configured image filename matches the page metadata.
+- The generator validates that every public numbered page exposing `og:image` has a matching theorem entry and that each page points to the image filename derived from its theorem number.
 
 ## Bilingual support
 

@@ -1,39 +1,20 @@
 {
-  "pages": [
+  "theorems": [
     {
-      "path": "index.html",
-      "image": "home.png",
-      "label": "AXLER COMPANION",
-      "title": "Axler Visualizations",
-      "subtitle": "Interactive visualizations for Linear Algebra Done Right."
+      "number": "3.51",
+      "title": "Matrix multiplication as linear combinations"
     },
     {
-      "path": "3-51/index.html",
-      "image": "3-51.png",
-      "label": "AXLER 3.51",
-      "title": "Matrix multiplication as linear combinations",
-      "subtitle": "Read a matrix product by columns or rows and see where the coefficients come from."
+      "number": "3.81",
+      "title": "Matrix of a product of linear maps"
     },
     {
-      "path": "3-81/index.html",
-      "image": "3-81.png",
-      "label": "AXLER 3.81",
-      "title": "Matrix of a product of linear maps",
-      "subtitle": "Follow a basis vector through two maps and see why composition becomes matrix multiplication."
+      "number": "3.82",
+      "title": "Identity operator between two bases"
     },
     {
-      "path": "3-82/index.html",
-      "image": "3-82.png",
-      "label": "AXLER 3.82",
-      "title": "Identity operator between two bases",
-      "subtitle": "Keep the vector fixed while its coordinate description changes between two bases."
-    },
-    {
-      "path": "3-84/index.html",
-      "image": "3-84.png",
-      "label": "AXLER 3.84",
-      "title": "Change-of-basis formula",
-      "subtitle": "See how matrices of the same operator are related when the basis changes."
+      "number": "3.84",
+      "title": "Change-of-basis formula"
     }
   ]
 }
