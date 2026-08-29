@@ -3,7 +3,29 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Axler 3.84 — Change-of-basis formula</title>
+<title>Change-of-Basis Formula — Axler 3.84 | Linear Algebra Done Right</title>
+<meta name="description" content="Interactive visualization of Axler 3.84: compare two coordinate routes for the same operator and see why matrices in different bases satisfy A = C⁻¹BC.">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta name="theme-color" content="#fbfaf7">
+<link rel="canonical" href="https://sellerbto.github.io/axler-visualizations/3-84/">
+<link rel="alternate" hreflang="en" href="https://sellerbto.github.io/axler-visualizations/3-84/?lang=en">
+<link rel="alternate" hreflang="ru" href="https://sellerbto.github.io/axler-visualizations/3-84/?lang=ru">
+<link rel="alternate" hreflang="x-default" href="https://sellerbto.github.io/axler-visualizations/3-84/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Axler Companion">
+<meta property="og:title" content="Change-of-Basis Formula — Axler 3.84">
+<meta property="og:description" content="Compare two coordinate routes for the same operator T and see directly why A = C⁻¹BC.">
+<meta property="og:url" content="https://sellerbto.github.io/axler-visualizations/3-84/">
+<meta property="og:image" content="https://sellerbto.github.io/axler-visualizations/assets/social/3-84.png">
+<meta property="og:image:width" content="600"><meta property="og:image:height" content="315">
+<meta property="og:image:alt" content="Axler 3.84 — Change-of-basis formula, A = C⁻¹BC">
+<meta property="og:locale" content="en_US"><meta property="og:locale:alternate" content="ru_RU">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Change-of-Basis Formula — Axler 3.84">
+<meta name="twitter:description" content="Interactive visualization of why matrices of the same operator in two bases satisfy A = C⁻¹BC.">
+<meta name="twitter:image" content="https://sellerbto.github.io/axler-visualizations/assets/social/3-84.png">
+<meta name="twitter:image:alt" content="Axler 3.84 — Change-of-basis formula, A = C⁻¹BC">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"LearningResource","name":"Change-of-Basis Formula — Axler 3.84","description":"Interactive visualization of Axler 3.84: compare two coordinate routes for the same operator and see why matrices in different bases satisfy A = C⁻¹BC.","url":"https://sellerbto.github.io/axler-visualizations/3-84/","image":"https://sellerbto.github.io/axler-visualizations/assets/social/3-84.png","learningResourceType":"interactive visualization","educationalLevel":"undergraduate","inLanguage":["en","ru"],"about":{"@type":"Thing","name":"Change of basis in linear algebra"},"isPartOf":{"@type":"WebSite","name":"Axler Companion","url":"https://sellerbto.github.io/axler-visualizations/"}}</script>
 <style>
 :root{
   --bg:#fbfaf7;--paper:#fffdfa;--ink:#171717;--muted:#716c64;--line:#d8d2c7;
@@ -57,16 +79,11 @@ details{margin-top:30px;border-bottom:1px solid var(--line);padding-bottom:24px}
   <div><div class="k" id="k"></div><h1 id="title"></h1></div>
   <div class="topnav"><a id="back"></a><button id="en" class="active">EN</button><button id="ru">RU</button></div>
 </header>
-
 <section class="lead">
   <div><h2 id="heroTitle"></h2><p id="heroSub"></p></div>
   <div class="legend"><span class="key"><span class="dot u"></span><span id="ku"></span></span><span class="key"><span class="dot v"></span><span id="kv"></span></span></div>
 </section>
-
-<div class="steps">
-  <button id="step0"></button><button id="step1"></button><button id="step2"></button><button id="step3"></button><button id="step4" class="active"></button>
-</div>
-
+<div class="steps"><button id="step0"></button><button id="step1"></button><button id="step2"></button><button id="step3"></button><button id="step4" class="active"></button></div>
 <section>
   <div class="route">
     <div class="node u" id="node1"><div class="coord">[x]<sub>u</sub></div><div id="n1"></div><div class="caption" id="c1"></div></div>
@@ -82,125 +99,38 @@ details{margin-top:30px;border-bottom:1px solid var(--line);padding-bottom:24px}
     <div class="bridge" id="bridgeA"><div class="name">A</div></div>
     <div class="node u" id="node6"><div class="coord">[Tx]<sub>u</sub></div><div id="dn2"></div></div>
   </div>
-
-  <div class="explain">
-    <div class="eyebrow" id="eyebrow"></div>
-    <div class="eq" id="eq"></div>
-    <div class="msg" id="msg"></div>
-    <div class="result" id="result"></div>
-  </div>
-
+  <div class="explain"><div class="eyebrow" id="eyebrow"></div><div class="eq" id="eq"></div><div class="msg" id="msg"></div><div class="result" id="result"></div></div>
   <div class="proofnote"><strong id="proofTitle"></strong><p id="proofText"></p></div>
 </section>
-
 <details>
-  <summary id="tryTitle"></summary>
-  <p class="detailslead" id="trySub"></p>
+  <summary id="tryTitle"></summary><p class="detailslead" id="trySub"></p>
   <div class="edit">
     <div class="group"><div class="lab" id="lt"></div><div class="rows"><div class="row"><input id="t11" type="number" step="0.25"><input id="t12" type="number" step="0.25"></div><div class="row"><input id="t21" type="number" step="0.25"><input id="t22" type="number" step="0.25"></div></div></div>
     <div class="group"><div class="lab" id="lu"></div><div class="rows"><div class="row"><span class="basis">u₁</span><input id="u11" type="number" step="0.25"><input id="u12" type="number" step="0.25"></div><div class="row"><span class="basis">u₂</span><input id="u21" type="number" step="0.25"><input id="u22" type="number" step="0.25"></div></div></div>
     <div class="group"><div class="lab" id="lv"></div><div class="rows"><div class="row"><span class="basis">v₁</span><input id="v11" type="number" step="0.25"><input id="v12" type="number" step="0.25"></div><div class="row"><span class="basis">v₂</span><input id="v21" type="number" step="0.25"><input id="v22" type="number" step="0.25"></div></div></div>
     <div class="group"><div class="lab" id="lx"></div><div class="rows"><div class="row"><input id="x1" type="number" step="0.25"><input id="x2" type="number" step="0.25"></div></div></div>
   </div>
-  <div class="warn" id="warn"></div>
-  <div class="controls"><button class="plainbtn" id="preset"></button><button class="plainbtn" id="reset"></button></div>
-
-  <div class="matrices">
-    <h3 id="matTitle"></h3><p id="matSub"></p>
-    <div class="mgrid">
-      <div class="mwrap"><div class="mt">A = M(T, u)</div><div class="mat" id="A"></div><div class="desc" id="da"></div></div>
-      <div class="mwrap"><div class="mt">B = M(T, v)</div><div class="mat" id="B"></div><div class="desc" id="db"></div></div>
-      <div class="mwrap"><div class="mt">C = M(I, u, v)</div><div class="mat" id="C"></div><div class="desc" id="dc"></div></div>
-      <div class="mwrap"><div class="mt">C⁻¹ = M(I, v, u)</div><div class="mat" id="Ci"></div><div class="desc" id="dci"></div></div>
-    </div>
-  </div>
+  <div class="warn" id="warn"></div><div class="controls"><button class="plainbtn" id="preset"></button><button class="plainbtn" id="reset"></button></div>
+  <div class="matrices"><h3 id="matTitle"></h3><p id="matSub"></p><div class="mgrid">
+    <div class="mwrap"><div class="mt">A = M(T, u)</div><div class="mat" id="A"></div><div class="desc" id="da"></div></div>
+    <div class="mwrap"><div class="mt">B = M(T, v)</div><div class="mat" id="B"></div><div class="desc" id="db"></div></div>
+    <div class="mwrap"><div class="mt">C = M(I, u, v)</div><div class="mat" id="C"></div><div class="desc" id="dc"></div></div>
+    <div class="mwrap"><div class="mt">C⁻¹ = M(I, v, u)</div><div class="mat" id="Ci"></div><div class="desc" id="dci"></div></div>
+  </div></div>
 </details>
-
 <div class="related"><span id="uses"></span><a id="l381"></a><a id="l382"></a></div>
 </main>
 <script>
 const S={
- en:{
-  k:'Linear Algebra Done Right · 3.84',title:'Change-of-basis formula',back:'← all visualizations',
-  heroTitle:'Two coordinate routes, one linear operator',heroSub:'The vector and the operator do not change. Only the coordinate language changes. Follow the upper route through v-coordinates and compare it with the direct u-coordinate route.',ku:'u-coordinates',kv:'v-coordinates',
-  step0:'start',step1:'rewrite in v',step2:'apply T',step3:'rewrite in u',step4:'compare',
-  c1:'start in u-coordinates',c2:'the same x, written in v-coordinates',c3:'the same Tx, written in v-coordinates',c4:'the same Tx, written in u-coordinates',
-  a1:'change coordinates',a2:'apply T in basis v',a3:'change coordinates back',eyebrow:'what is happening',
-  m0:'Both routes start from the same coordinate vector.',m1:'C does not move x. It rewrites the coordinates of the same vector from the u-basis into the v-basis.',m2:'B is the matrix of the same operator T, but in the v-basis. It turns [x]v into [Tx]v.',m3:'C⁻¹ again changes only the coordinate description, rewriting [Tx]v as [Tx]u.',m4:'For every x, the upper route and the direct route have exactly the same input and output. Therefore their matrices are equal.',
-  proofTitle:'Why this is a proof',proofText:'The diagram is not relying on this one numerical example. The two routes represent linear maps from u-coordinate vectors to u-coordinate vectors. Because they agree on every x, the linear maps are equal; by 3.81 the upper route has matrix C⁻¹BC, while the lower route has matrix A.',
-  tryTitle:'Try a concrete 2D example',trySub:'The proof above is basis-independent. This playground only gives numbers to the same mechanism. T is entered in the standard basis e; u and v are two bases written in e-coordinates.',
-  lt:'T in the standard basis e',lu:'basis u (vectors in e-coordinates)',lv:'basis v (vectors in e-coordinates)',lx:'starting coordinates [x]u',warn:'u and v must remain bases, so both determinants must be nonzero.',preset:'change basis v',reset:'reset example',
-  matTitle:'Matrices generated by the example',matSub:'They are computed independently from T and the two bases; the equality A = C⁻¹BC is then visible in the two routes above.',da:'T described in u-coordinates',db:'the same T described in v-coordinates',dc:'u-coordinates → v-coordinates',dci:'v-coordinates → u-coordinates',
-  uses:'Proof ingredients:',l381:'3.81 — matrix of a product',l382:'3.82 — inverse coordinate-change matrices'
- },
- ru:{
-  k:'Linear Algebra Done Right · 3.84',title:'Формула смены базиса',back:'← все визуализации',
-  heroTitle:'Два координатных пути, один линейный оператор',heroSub:'Сам вектор и оператор не меняются. Меняется только язык координат. Пройди верхний путь через v-координаты и сравни его с прямым путём в u-координатах.',ku:'u-координаты',kv:'v-координаты',
-  step0:'старт',step1:'переписать в v',step2:'применить T',step3:'переписать в u',step4:'сравнить',
-  c1:'начинаем в u-координатах',c2:'тот же x, записанный в v-координатах',c3:'тот же Tx, записанный в v-координатах',c4:'тот же Tx, записанный в u-координатах',
-  a1:'смена координат',a2:'применяем T в базисе v',a3:'меняем координаты обратно',eyebrow:'что происходит',
-  m0:'Оба пути начинаются с одного и того же координатного вектора.',m1:'C не двигает x. Она лишь переписывает координаты того же вектора из базиса u в базис v.',m2:'B — матрица того же оператора T, но в базисе v. Она переводит [x]v в [Tx]v.',m3:'C⁻¹ снова меняет только описание координат: переписывает [Tx]v как [Tx]u.',m4:'Для любого x верхний и прямой пути имеют одинаковый вход и одинаковый выход. Значит, их матрицы равны.',
-  proofTitle:'Почему это доказательство',proofText:'Диаграмма не опирается на один численный пример. Оба пути задают линейные отображения из u-координат в u-координаты. Они совпадают для любого x, значит сами отображения равны; по 3.81 матрица верхнего пути равна C⁻¹BC, а матрица нижнего пути равна A.',
-  tryTitle:'Попробуй конкретный двумерный пример',trySub:'Доказательство выше не зависит от размерности. Здесь мы только подставляем числа в тот же механизм. T задаётся в стандартном базисе e; u и v — два базиса, записанные в e-координатах.',
-  lt:'T в стандартном базисе e',lu:'базис u (векторы в e-координатах)',lv:'базис v (векторы в e-координатах)',lx:'начальные координаты [x]u',warn:'u и v должны оставаться базисами: оба определителя должны быть ненулевыми.',preset:'сменить базис v',reset:'сбросить пример',
-  matTitle:'Матрицы, полученные в примере',matSub:'Они независимо вычисляются из T и двух базисов; после этого равенство A = C⁻¹BC видно по двум путям выше.',da:'T в u-координатах',db:'тот же T в v-координатах',dc:'u-координаты → v-координаты',dci:'v-координаты → u-координаты',
-  uses:'В доказательстве используются:',l381:'3.81 — матрица произведения',l382:'3.82 — обратные матрицы смены координат'
- }
+ en:{k:'Linear Algebra Done Right · 3.84',title:'Change-of-basis formula',back:'← all visualizations',heroTitle:'Two coordinate routes, one linear operator',heroSub:'The vector and the operator do not change. Only the coordinate language changes. Follow the upper route through v-coordinates and compare it with the direct u-coordinate route.',ku:'u-coordinates',kv:'v-coordinates',step0:'start',step1:'rewrite in v',step2:'apply T',step3:'rewrite in u',step4:'compare',c1:'start in u-coordinates',c2:'the same x, written in v-coordinates',c3:'the same Tx, written in v-coordinates',c4:'the same Tx, written in u-coordinates',a1:'change coordinates',a2:'apply T in basis v',a3:'change coordinates back',eyebrow:'what is happening',m0:'Both routes start from the same coordinate vector.',m1:'C does not move x. It rewrites the coordinates of the same vector from the u-basis into the v-basis.',m2:'B is the matrix of the same operator T, but in the v-basis. It turns [x]v into [Tx]v.',m3:'C⁻¹ again changes only the coordinate description, rewriting [Tx]v as [Tx]u.',m4:'For every x, the upper route and the direct route have exactly the same input and output. Therefore their matrices are equal.',proofTitle:'Why this is a proof',proofText:'The diagram is not relying on this one numerical example. The two routes represent linear maps from u-coordinate vectors to u-coordinate vectors. Because they agree on every x, the linear maps are equal; by 3.81 the upper route has matrix C⁻¹BC, while the lower route has matrix A.',tryTitle:'Try a concrete 2D example',trySub:'The proof above is basis-independent. This playground only gives numbers to the same mechanism. T is entered in the standard basis e; u and v are two bases written in e-coordinates.',lt:'T in the standard basis e',lu:'basis u (vectors in e-coordinates)',lv:'basis v (vectors in e-coordinates)',lx:'starting coordinates [x]u',warn:'u and v must remain bases, so both determinants must be nonzero.',preset:'change basis v',reset:'reset example',matTitle:'Matrices generated by the example',matSub:'They are computed independently from T and the two bases; the equality A = C⁻¹BC is then visible in the two routes above.',da:'T described in u-coordinates',db:'the same T described in v-coordinates',dc:'u-coordinates → v-coordinates',dci:'v-coordinates → u-coordinates',uses:'Proof ingredients:',l381:'3.81 — matrix of a product',l382:'3.82 — inverse coordinate-change matrices'},
+ ru:{k:'Linear Algebra Done Right · 3.84',title:'Формула смены базиса',back:'← все визуализации',heroTitle:'Два координатных пути, один линейный оператор',heroSub:'Сам вектор и оператор не меняются. Меняется только язык координат. Пройди верхний путь через v-координаты и сравни его с прямым путём в u-координатах.',ku:'u-координаты',kv:'v-координаты',step0:'старт',step1:'переписать в v',step2:'применить T',step3:'переписать в u',step4:'сравнить',c1:'начинаем в u-координатах',c2:'тот же x, записанный в v-координатах',c3:'тот же Tx, записанный в v-координатах',c4:'тот же Tx, записанный в u-координатах',a1:'смена координат',a2:'применяем T в базисе v',a3:'меняем координаты обратно',eyebrow:'что происходит',m0:'Оба пути начинаются с одного и того же координатного вектора.',m1:'C не двигает x. Она лишь переписывает координаты того же вектора из базиса u в базис v.',m2:'B — матрица того же оператора T, но в базисе v. Она переводит [x]v в [Tx]v.',m3:'C⁻¹ снова меняет только описание координат: переписывает [Tx]v как [Tx]u.',m4:'Для любого x верхний и прямой пути имеют одинаковый вход и одинаковый выход. Значит, их матрицы равны.',proofTitle:'Почему это доказательство',proofText:'Диаграмма не опирается на один численный пример. Оба пути задают линейные отображения из u-координат в u-координаты. Они совпадают для любого x, значит сами отображения равны; по 3.81 матрица верхнего пути равна C⁻¹BC, а матрица нижнего пути равна A.',tryTitle:'Попробуй конкретный двумерный пример',trySub:'Доказательство выше не зависит от размерности. Здесь мы только подставляем числа в тот же механизм. T задаётся в стандартном базисе e; u и v — два базиса, записанные в e-координатах.',lt:'T в стандартном базисе e',lu:'базис u (векторы в e-координатах)',lv:'базис v (векторы в e-координатах)',lx:'начальные координаты [x]u',warn:'u и v должны оставаться базисами: оба определителя должны быть ненулевыми.',preset:'сменить базис v',reset:'сбросить пример',matTitle:'Матрицы, полученные в примере',matSub:'Они независимо вычисляются из T и двух базисов; после этого равенство A = C⁻¹BC видно по двум путям выше.',da:'T в u-координатах',db:'тот же T в v-координатах',dc:'u-координаты → v-координаты',dci:'v-координаты → u-координаты',uses:'В доказательстве используются:',l381:'3.81 — матрица произведения',l382:'3.82 — обратные матрицы смены координат'}
 };
-let lang='en',step=4,presetN=0;
-const $=id=>document.getElementById(id);
-const ids=['t11','t12','t21','t22','u11','u12','u21','u22','v11','v12','v21','v22','x1','x2'];
-const defaults={t11:2,t12:1,t21:-1,t22:1,u11:1,u12:0,u21:0,u22:1,v11:1,v12:-1,v21:1,v22:1,x1:2,x2:-1};
-function txt(k){return S[lang][k]}
-function n(id){return Number($(id).value||0)}
-function fmt(x){if(Math.abs(x)<1e-10)x=0;const r=Math.round(x*100)/100;return Number.isInteger(r)?String(r):String(r)}
-function M(a,b,c,d){return [[a,b],[c,d]]}
-function det(A){return A[0][0]*A[1][1]-A[0][1]*A[1][0]}
-function inv(A){const q=det(A);return [[A[1][1]/q,-A[0][1]/q],[-A[1][0]/q,A[0][0]/q]]}
-function mm(A,B){return A.map((r,i)=>B[0].map((_,j)=>r.reduce((s,__,k)=>s+A[i][k]*B[k][j],0)))}
-function mv(A,v){return A.map(r=>r[0]*v[0]+r[1]*v[1])}
-function vec(v){return `<span class="vec"><span>${fmt(v[0])}</span><span>${fmt(v[1])}</span></span>`}
-function matrix(el,A){el.innerHTML='';el.style.gridTemplateColumns='repeat(2,61px)';A.forEach(r=>r.forEach(x=>{const s=document.createElement('span');s.className='cell';s.textContent=fmt(x);el.appendChild(s)}))}
-function setStatic(){
- ['k','title','heroTitle','heroSub','ku','kv','step0','step1','step2','step3','step4','c1','c2','c3','c4','a1','a2','a3','eyebrow','proofTitle','proofText','tryTitle','trySub','lt','lu','lv','lx','preset','reset','matTitle','matSub','da','db','dc','dci','uses'].forEach(id=>$(id).textContent=txt(id));
- $('back').textContent=txt('back');$('back').href=`../index.html?lang=${lang}`;
- $('l381').textContent=txt('l381');$('l381').href=`../3-81/index.html?lang=${lang}`;
- $('l382').textContent=txt('l382');$('l382').href=`../3-82/index.html?lang=${lang}`;
- $('en').classList.toggle('active',lang==='en');$('ru').classList.toggle('active',lang==='ru');
- [0,1,2,3,4].forEach(i=>$('step'+i).classList.toggle('active',step===i));document.documentElement.lang=lang;
-}
-function focus(active){
- const all=['node1','node2','node3','node4','node5','node6','arrow1','arrow2','arrow3','bridgeA'];
- all.forEach(id=>{$(id).classList.remove('focus','dim')});
- if(step!==4)all.forEach(id=>{if(!active.includes(id))$(id).classList.add('dim')});
- active.forEach(id=>$(id).classList.add('focus'));
-}
-function render(){
- setStatic();
- const T=M(n('t11'),n('t12'),n('t21'),n('t22'));
- const U=M(n('u11'),n('u21'),n('u12'),n('u22'));
- const V=M(n('v11'),n('v21'),n('v12'),n('v22'));
- const xu=[n('x1'),n('x2')];
- const ok=Math.abs(det(U))>1e-8&&Math.abs(det(V))>1e-8;
- if(!ok){$('warn').textContent=txt('warn');['n1','n2','n3','n4','dn1','dn2'].forEach(id=>$(id).innerHTML='—');['A','B','C','Ci'].forEach(id=>$(id).innerHTML='—');$('eq').innerHTML='—';$('msg').textContent='';$('result').innerHTML='';focus([]);return}
- $('warn').textContent='';
- const Uinv=inv(U),Vinv=inv(V),xStd=mv(U,xu),xv=mv(Vinv,xStd),TxStd=mv(T,xStd),Txv=mv(Vinv,TxStd),Txu=mv(Uinv,TxStd);
- const A=mm(Uinv,mm(T,U)),B=mm(Vinv,mm(T,V)),C=mm(Vinv,U),Ci=mm(Uinv,V);
- $('n1').innerHTML=vec(xu);$('n2').innerHTML=vec(xv);$('n3').innerHTML=vec(Txv);$('n4').innerHTML=vec(Txu);$('dn1').innerHTML=vec(xu);$('dn2').innerHTML=vec(Txu);
- matrix($('A'),A);matrix($('B'),B);matrix($('C'),C);matrix($('Ci'),Ci);
- let eq='',msg='',active=[];
- if(step===0){eq='[x]<sub>u</sub>';msg=txt('m0');active=['node1','node5']}
- if(step===1){eq='[x]<sub>v</sub> = C[x]<sub>u</sub>';msg=txt('m1');active=['node1','arrow1','node2']}
- if(step===2){eq='[Tx]<sub>v</sub> = B[x]<sub>v</sub>';msg=txt('m2');active=['node2','arrow2','node3']}
- if(step===3){eq='[Tx]<sub>u</sub> = C⁻¹[Tx]<sub>v</sub>';msg=txt('m3');active=['node3','arrow3','node4']}
- if(step===4){eq='[Tx]<sub>u</sub> = C⁻¹BC[x]<sub>u</sub> = A[x]<sub>u</sub>';msg=txt('m4');active=['node1','arrow1','node2','arrow2','node3','arrow3','node4','node5','bridgeA','node6']}
- $('eq').innerHTML=eq;$('msg').textContent=msg;$('result').innerHTML=step===4?'A = <span class="chg">C⁻¹</span> B <span class="chg">C</span>':'';focus(active);
-}
-function detect(){const q=new URLSearchParams(location.search).get('lang');if(q==='ru'||q==='en')lang=q;else if(navigator.language.toLowerCase().startsWith('ru'))lang='ru'}
-function reset(){Object.entries(defaults).forEach(([k,v])=>$(k).value=v);step=4;presetN=0;render()}
-function preset(){presetN=(presetN+1)%3;const sets=[{v11:1,v12:-1,v21:1,v22:1},{v11:2,v12:1,v21:-1,v22:1},{v11:1,v12:2,v21:1,v22:-1}],s=sets[presetN];Object.entries(s).forEach(([k,v])=>$(k).value=v);render()}
-ids.forEach(id=>$(id).addEventListener('input',render));
-$('en').onclick=()=>{lang='en';render()};$('ru').onclick=()=>{lang='ru';render()};[0,1,2,3,4].forEach(i=>$('step'+i).onclick=()=>{step=i;render()});$('preset').onclick=preset;$('reset').onclick=reset;detect();reset();
+let lang='en',step=4,presetN=0;const $=id=>document.getElementById(id);const ids=['t11','t12','t21','t22','u11','u12','u21','u22','v11','v12','v21','v22','x1','x2'];const defaults={t11:2,t12:1,t21:-1,t22:1,u11:1,u12:0,u21:0,u22:1,v11:1,v12:-1,v21:1,v22:1,x1:2,x2:-1};
+function txt(k){return S[lang][k]}function n(id){return Number($(id).value||0)}function fmt(x){if(Math.abs(x)<1e-10)x=0;const r=Math.round(x*100)/100;return Number.isInteger(r)?String(r):String(r)}function M(a,b,c,d){return [[a,b],[c,d]]}function det(A){return A[0][0]*A[1][1]-A[0][1]*A[1][0]}function inv(A){const q=det(A);return [[A[1][1]/q,-A[0][1]/q],[-A[1][0]/q,A[0][0]/q]]}function mm(A,B){return A.map((r,i)=>B[0].map((_,j)=>r.reduce((s,__,k)=>s+A[i][k]*B[k][j],0)))}function mv(A,v){return A.map(r=>r[0]*v[0]+r[1]*v[1])}function vec(v){return `<span class="vec"><span>${fmt(v[0])}</span><span>${fmt(v[1])}</span></span>`}function matrix(el,A){el.innerHTML='';el.style.gridTemplateColumns='repeat(2,61px)';A.forEach(r=>r.forEach(x=>{const s=document.createElement('span');s.className='cell';s.textContent=fmt(x);el.appendChild(s)}))}
+function setStatic(){['k','title','heroTitle','heroSub','ku','kv','step0','step1','step2','step3','step4','c1','c2','c3','c4','a1','a2','a3','eyebrow','proofTitle','proofText','tryTitle','trySub','lt','lu','lv','lx','preset','reset','matTitle','matSub','da','db','dc','dci','uses'].forEach(id=>$(id).textContent=txt(id));$('back').textContent=txt('back');$('back').href=`../index.html?lang=${lang}`;$('l381').textContent=txt('l381');$('l381').href=`../3-81/index.html?lang=${lang}`;$('l382').textContent=txt('l382');$('l382').href=`../3-82/index.html?lang=${lang}`;$('en').classList.toggle('active',lang==='en');$('ru').classList.toggle('active',lang==='ru');[0,1,2,3,4].forEach(i=>$('step'+i).classList.toggle('active',step===i));document.documentElement.lang=lang}
+function focus(active){const all=['node1','node2','node3','node4','node5','node6','arrow1','arrow2','arrow3','bridgeA'];all.forEach(id=>{$(id).classList.remove('focus','dim')});if(step!==4)all.forEach(id=>{if(!active.includes(id))$(id).classList.add('dim')});active.forEach(id=>$(id).classList.add('focus'))}
+function render(){setStatic();const T=M(n('t11'),n('t12'),n('t21'),n('t22'));const U=M(n('u11'),n('u21'),n('u12'),n('u22'));const V=M(n('v11'),n('v21'),n('v12'),n('v22'));const xu=[n('x1'),n('x2')];const ok=Math.abs(det(U))>1e-8&&Math.abs(det(V))>1e-8;if(!ok){$('warn').textContent=txt('warn');['n1','n2','n3','n4','dn1','dn2'].forEach(id=>$(id).innerHTML='—');['A','B','C','Ci'].forEach(id=>$(id).innerHTML='—');$('eq').innerHTML='—';$('msg').textContent='';$('result').innerHTML='';focus([]);return}$('warn').textContent='';const Uinv=inv(U),Vinv=inv(V),xStd=mv(U,xu),xv=mv(Vinv,xStd),TxStd=mv(T,xStd),Txv=mv(Vinv,TxStd),Txu=mv(Uinv,TxStd);const A=mm(Uinv,mm(T,U)),B=mm(Vinv,mm(T,V)),C=mm(Vinv,U),Ci=mm(Uinv,V);$('n1').innerHTML=vec(xu);$('n2').innerHTML=vec(xv);$('n3').innerHTML=vec(Txv);$('n4').innerHTML=vec(Txu);$('dn1').innerHTML=vec(xu);$('dn2').innerHTML=vec(Txu);matrix($('A'),A);matrix($('B'),B);matrix($('C'),C);matrix($('Ci'),Ci);let eq='',msg='',active=[];if(step===0){eq='[x]<sub>u</sub>';msg=txt('m0');active=['node1','node5']}if(step===1){eq='[x]<sub>v</sub> = C[x]<sub>u</sub>';msg=txt('m1');active=['node1','arrow1','node2']}if(step===2){eq='[Tx]<sub>v</sub> = B[x]<sub>v</sub>';msg=txt('m2');active=['node2','arrow2','node3']}if(step===3){eq='[Tx]<sub>u</sub> = C⁻¹[Tx]<sub>v</sub>';msg=txt('m3');active=['node3','arrow3','node4']}if(step===4){eq='[Tx]<sub>u</sub> = C⁻¹BC[x]<sub>u</sub> = A[x]<sub>u</sub>';msg=txt('m4');active=['node1','arrow1','node2','arrow2','node3','arrow3','node4','node5','bridgeA','node6']}$('eq').innerHTML=eq;$('msg').textContent=msg;$('result').innerHTML=step===4?'A = <span class="chg">C⁻¹</span> B <span class="chg">C</span>':'';focus(active)}
+function detect(){const q=new URLSearchParams(location.search).get('lang');if(q==='ru'||q==='en')lang=q;else if(navigator.language.toLowerCase().startsWith('ru'))lang='ru'}function reset(){Object.entries(defaults).forEach(([k,v])=>$(k).value=v);step=4;presetN=0;render()}function preset(){presetN=(presetN+1)%3;const sets=[{v11:1,v12:-1,v21:1,v22:1},{v11:2,v12:1,v21:-1,v22:1},{v11:1,v12:2,v21:1,v22:-1}],s=sets[presetN];Object.entries(s).forEach(([k,v])=>$(k).value=v);render()}ids.forEach(id=>$(id).addEventListener('input',render));$('en').onclick=()=>{lang='en';render()};$('ru').onclick=()=>{lang='ru';render()};[0,1,2,3,4].forEach(i=>$('step'+i).onclick=()=>{step=i;render()});$('preset').onclick=preset;$('reset').onclick=reset;detect();reset();
 </script>
 </body>
 </html>

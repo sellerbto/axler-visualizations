@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  <url>
+    <loc>https://sellerbto.github.io/axler-visualizations/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://sellerbto.github.io/axler-visualizations/?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://sellerbto.github.io/axler-visualizations/?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://sellerbto.github.io/axler-visualizations/"/>
+    <image:image><image:loc>https://sellerbto.github.io/axler-visualizations/assets/social/home.png</image:loc><image:title>Axler Companion — Linear Algebra Done Right visualizations</image:title></image:image>
+  </url>
+  <url>
+    <loc>https://sellerbto.github.io/axler-visualizations/3-51/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://sellerbto.github.io/axler-visualizations/3-51/?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://sellerbto.github.io/axler-visualizations/3-51/?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://sellerbto.github.io/axler-visualizations/3-51/"/>
+    <image:image><image:loc>https://sellerbto.github.io/axler-visualizations/assets/social/3-51.png</image:loc><image:title>Axler 3.51 — Matrix multiplication as linear combinations</image:title></image:image>
+  </url>
+  <url>
+    <loc>https://sellerbto.github.io/axler-visualizations/3-81/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://sellerbto.github.io/axler-visualizations/3-81/?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://sellerbto.github.io/axler-visualizations/3-81/?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://sellerbto.github.io/axler-visualizations/3-81/"/>
+    <image:image><image:loc>https://sellerbto.github.io/axler-visualizations/assets/social/3-81.png</image:loc><image:title>Axler 3.81 — Matrix of a product of linear maps</image:title></image:image>
+  </url>
+  <url>
+    <loc>https://sellerbto.github.io/axler-visualizations/3-82/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://sellerbto.github.io/axler-visualizations/3-82/?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://sellerbto.github.io/axler-visualizations/3-82/?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://sellerbto.github.io/axler-visualizations/3-82/"/>
+    <image:image><image:loc>https://sellerbto.github.io/axler-visualizations/assets/social/3-82.png</image:loc><image:title>Axler 3.82 — Identity operator between two bases</image:title></image:image>
+  </url>
+  <url>
+    <loc>https://sellerbto.github.io/axler-visualizations/3-84/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://sellerbto.github.io/axler-visualizations/3-84/?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://sellerbto.github.io/axler-visualizations/3-84/?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://sellerbto.github.io/axler-visualizations/3-84/"/>
+    <image:image><image:loc>https://sellerbto.github.io/axler-visualizations/assets/social/3-84.png</image:loc><image:title>Axler 3.84 — Change-of-basis formula</image:title></image:image>
+  </url>
+</urlset>

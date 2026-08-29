@@ -30,6 +30,13 @@ Keep the repository organized as a small static site for GitHub Pages.
 /
 ├── index.html                      # main visualization menu
 ├── AGENTS.md                       # repository/workflow instructions
+├── social-previews.json            # source data for generated social previews
+├── scripts/
+│   └── generate_social_previews.py # generic 1200×630 preview renderer
+├── assets/
+│   └── social/                     # generated PNG previews; do not hand-edit
+├── .github/workflows/
+│   └── social-previews.yml         # regenerates previews on main
 ├── skills/
 │   ├── axler-visualizations/
 │   │   └── SKILL.md                # ChatGPT/agent project bootstrap skill
@@ -63,11 +70,23 @@ When adding a visualization:
 2. Follow `skills/math-visualization/SKILL.md` when designing the interaction.
 3. Add the visualization to the root menu.
 4. Add both English and Russian interface copy.
-5. Add a back link to the root menu.
-6. Preserve the selected language when navigating between the menu and the visualization.
-7. Re-read all changed files after writing them and verify the expected version is on `main`.
+5. Add one entry to `social-previews.json` with the strict fields `path`, `image`, `label`, `title`, and `subtitle`.
+6. Add a back link to the root menu.
+7. Preserve the selected language when navigating between the menu and the visualization.
+8. Re-read all changed files after writing them and verify the expected version is on `main`.
 
-A new visualization is not complete until it is reachable from the root menu.
+A new visualization is not complete until it is reachable from the root menu and represented in `social-previews.json`.
+
+## Social previews
+
+Social preview PNGs are generated artifacts, not hand-designed per-page files.
+
+- Do not manually edit or upload files in `assets/social/`.
+- `social-previews.json` is the only page-specific input to the preview renderer.
+- Keep preview entries declarative: `path`, `image`, `label`, `title`, and `subtitle` only.
+- `scripts/generate_social_previews.py` must use one generic layout for every page; do not add theorem-specific rendering branches or hard-coded theorem lists.
+- `.github/workflows/social-previews.yml` regenerates previews on `main` and commits changed PNGs with `github-actions[bot]`.
+- The generator validates that every public page exposing `og:image` has a matching config entry and that the configured image filename matches the page metadata.
 
 ## Bilingual support
 
