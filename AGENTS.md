@@ -37,6 +37,12 @@ Keep the repository organized as a small static site for GitHub Pages.
 │       └── SKILL.md                # visualization design guidance
 ├── 3-51/
 │   └── index.html                  # one visualization
+├── 3-81/
+│   └── index.html                  # one visualization
+├── 3-82/
+│   └── index.html                  # one visualization
+├── 3-84/
+│   └── index.html                  # one visualization
 └── <new-topic>/
     └── index.html                  # future visualization
 ```
@@ -169,5 +175,8 @@ Therefore:
 At the moment:
 
 - `3-51/` — matrix multiplication as linear combinations of columns/rows.
+- `3-81/` — matrix of a product of linear maps via basis-vector columns.
+- `3-82/` — identity operator between two bases and inverse coordinate-change matrices.
+- `3-84/` — change-of-basis formula `A = C^{-1}BC` as two coordinate routes for the same operator.
 
 Keep this list updated when new visualization folders are added.
