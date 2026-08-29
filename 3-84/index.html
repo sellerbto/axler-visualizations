@@ -1,31 +1,206 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Axler 3.84</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Axler 3.84 — Change-of-basis formula</title>
 <style>
-:root{--bg:#fbfaf7;--ink:#171717;--muted:#746f67;--line:#d8d2c7;--paper:#fffdfa;--blue:#e9f1ff;--orange:#fff0de;--green:#e8f4ea;--accent:#2f6feb;--bad:#a33a2b}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,system-ui,sans-serif}main{max-width:1120px;margin:0 auto;padding:36px 16px 64px}header{display:grid;grid-template-columns:1fr auto;gap:20px;border-bottom:1px solid var(--line);padding-bottom:18px}h1{font:400 clamp(30px,4vw,54px)/1.06 Georgia,serif;margin:0}.k{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:8px}p{line-height:1.55}.top{display:flex;gap:16px;align-items:flex-end;flex-wrap:wrap}.top a,.top button,.controls button{border:0;background:none;border-bottom:1px solid transparent;color:var(--muted);font:inherit;padding:4px 0 6px;text-decoration:none;cursor:pointer}.top a:hover,.top button:hover,.top .active,.controls button:hover{color:var(--ink);border-color:var(--ink)}
-.edit{padding:28px 0 22px;display:grid;grid-template-columns:repeat(4,1fr);gap:22px}.group{border-top:1px solid var(--line);padding-top:14px}.lab{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:10px}.rows{display:grid;gap:7px}.pair{display:flex;gap:6px}.pair input{width:64px;height:38px;border:0;border-bottom:1px solid var(--line);background:transparent;text-align:center;font:500 17px Georgia,serif}.pair input:focus{outline:none;border-color:var(--ink);background:#fff}.warn{grid-column:1/-1;color:var(--bad);font-size:14px;min-height:18px}.diagram{border-top:1px solid var(--line);padding-top:28px}.q{font:400 clamp(23px,3vw,34px)/1.25 Georgia,serif;margin:0 0 24px}.path{display:grid;grid-template-columns:1fr 52px 1fr 52px 1fr 52px 1fr;gap:8px;align-items:center}.node{text-align:center;min-height:118px;display:grid;place-items:center;align-content:center;gap:8px}.node small{color:var(--muted);line-height:1.35}.arrow{text-align:center}.arrow .sym{font-size:24px;color:#9a948b}.arrow .name{font:400 18px Georgia,serif;margin-top:4px}.vec{display:inline-grid;gap:3px;position:relative;padding:3px 12px;min-width:58px}.vec:before,.vec:after{content:"";position:absolute;top:0;bottom:0;width:6px;border-top:1.2px solid currentColor;border-bottom:1.2px solid currentColor}.vec:before{left:0;border-left:1.2px solid currentColor}.vec:after{right:0;border-right:1.2px solid currentColor}.vec span{font:400 20px Georgia,serif;text-align:center}.direct{margin:10px auto 0;max-width:560px;display:grid;grid-template-columns:1fr 160px 1fr;align-items:center;text-align:center}.direct .bar{position:relative;border-top:1px solid var(--ink);margin:0 12px}.direct .bar:after{content:'›';position:absolute;right:-2px;top:-16px;font-size:25px}.direct .bar span{position:absolute;left:50%;transform:translateX(-50%);top:-28px;background:var(--bg);padding:0 8px;font:400 18px Georgia,serif}.matsec{margin-top:34px;border-top:1px solid var(--line);padding-top:26px}.mgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}.mwrap{display:grid;gap:8px;justify-items:center;text-align:center}.mwrap .desc{color:var(--muted);font-size:13px}.m{position:relative;display:grid;gap:4px;padding:7px 12px}.m:before,.m:after{content:"";position:absolute;top:0;bottom:0;width:7px;border-top:1.2px solid currentColor;border-bottom:1.2px solid currentColor}.m:before{left:0;border-left:1.2px solid currentColor}.m:after{right:0;border-right:1.2px solid currentColor}.mc{width:66px;text-align:center;font:400 18px Georgia,serif}.identity{margin-top:28px;text-align:center;font:400 clamp(25px,3.4vw,40px)/1.3 Georgia,serif}.identity .c{background:var(--green);border-radius:5px;padding:2px 8px}.note{max-width:820px;margin:12px auto 0;color:#514d47;text-align:center}.ingredients{margin-top:26px;padding-top:18px;border-top:1px solid var(--line);display:flex;justify-content:center;gap:22px;flex-wrap:wrap;font-size:14px}.ingredients span{color:var(--muted)}.ingredients a{color:var(--accent);text-decoration:none}.ingredients a:hover{text-decoration:underline}.controls{display:flex;justify-content:flex-end;gap:16px;margin-top:20px}
-@media(max-width:900px){header{grid-template-columns:1fr}.edit,.mgrid{grid-template-columns:1fr 1fr}.path{grid-template-columns:1fr}.arrow .sym{transform:rotate(90deg);display:inline-block}.direct{grid-template-columns:1fr;gap:30px}.direct .bar{width:160px;margin:auto}.warn{grid-column:1/-1}}@media(max-width:560px){.edit,.mgrid{grid-template-columns:1fr}}
+:root{
+  --bg:#fbfaf7;--paper:#fffdfa;--ink:#171717;--muted:#716c64;--line:#d8d2c7;
+  --u:#a8502d;--u-soft:#f8ece5;--v:#285fb8;--v-soft:#eaf1ff;
+  --change:#39784d;--change-soft:#e8f4ea;--accent:#2f6feb;--bad:#a33a2b
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,system-ui,-apple-system,sans-serif}
+main{max-width:1100px;margin:0 auto;padding:36px 18px 72px}
+header{display:grid;grid-template-columns:1fr auto;gap:24px;border-bottom:1px solid var(--line);padding-bottom:20px}
+.k{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
+h1{font:400 clamp(34px,5vw,60px)/1.03 Georgia,serif;margin:0}
+p{line-height:1.58}
+.topnav{display:flex;gap:16px;align-items:flex-end;flex-wrap:wrap}
+.topnav a,.topnav button,.steps button,.plainbtn{border:0;background:none;border-bottom:1px solid transparent;color:var(--muted);font:inherit;padding:4px 0 6px;text-decoration:none;cursor:pointer}
+.topnav a:hover,.topnav button:hover,.topnav .active,.steps button:hover,.steps .active,.plainbtn:hover{color:var(--ink);border-color:var(--ink)}
+.lead{padding:30px 0 12px;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:28px;align-items:end}
+.lead h2{font:400 clamp(28px,4vw,48px)/1.08 Georgia,serif;margin:0 0 10px}
+.lead p{max-width:760px;color:#4f4b46;margin:0}
+.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:13px;color:var(--muted);padding-bottom:4px}
+.key{display:flex;gap:7px;align-items:center}.dot{width:10px;height:10px;border-radius:50%}.dot.u{background:var(--u)}.dot.v{background:var(--v)}
+.steps{display:flex;gap:18px;flex-wrap:wrap;margin:18px 0 22px;padding-bottom:9px;border-bottom:1px solid var(--line)}
+.route{display:grid;grid-template-columns:1fr 104px 1fr 104px 1fr 104px 1fr;gap:8px;align-items:stretch}
+.node{min-height:142px;border:1px solid transparent;border-radius:18px;padding:16px 12px;display:grid;place-items:center;align-content:center;gap:9px;transition:.16s border-color,.16s transform,.16s opacity}
+.node.u{background:var(--u-soft)}.node.v{background:var(--v-soft)}.node.focus{border-color:#b8afa4;transform:translateY(-1px)}
+.coord{font:400 28px Georgia,serif}.coord sub{font-size:.6em;vertical-align:-.2em}.node .caption{font-size:13px;line-height:1.35;color:var(--muted);text-align:center;max-width:190px}
+.arrow{display:grid;place-items:center;align-content:center;gap:7px;text-align:center;color:#8e877e;transition:.16s opacity}
+.arrow .glyph{font-size:28px;line-height:1}.arrow .name{font:400 25px Georgia,serif}.arrow .why{font-size:12px;line-height:1.25;color:var(--muted);max-width:96px}
+.arrow.change .name{color:var(--change)}.arrow.focus .glyph,.arrow.focus .name{color:var(--ink)}
+.direct{max-width:760px;margin:20px auto 0;display:grid;grid-template-columns:1fr 210px 1fr;gap:14px;align-items:center}
+.direct .node{min-height:112px}.bridge{height:54px;position:relative;display:grid;place-items:center}.bridge:before{content:"";position:absolute;left:0;right:0;top:50%;border-top:1.5px solid var(--ink)}.bridge:after{content:"›";position:absolute;right:-2px;top:9px;font-size:30px}.bridge .name{position:relative;background:var(--bg);padding:0 10px;font:400 25px Georgia,serif}.bridge.focus .name{background:var(--change-soft);border-radius:8px}
+.vec{display:inline-grid;gap:3px;position:relative;padding:5px 14px;min-width:66px;color:var(--ink)}
+.vec:before,.vec:after{content:"";position:absolute;top:0;bottom:0;width:8px;border-top:1.3px solid currentColor;border-bottom:1.3px solid currentColor}.vec:before{left:0;border-left:1.3px solid currentColor}.vec:after{right:0;border-right:1.3px solid currentColor}.vec span{font:400 21px Georgia,serif;text-align:center}
+.explain{margin-top:20px;background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:20px 22px;display:grid;gap:8px}
+.explain .eyebrow{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.explain .eq{font:400 clamp(23px,3vw,36px)/1.35 Georgia,serif}.explain .eq sub{font-size:.6em}.explain .msg{color:#4f4b46;max-width:880px}
+.result{text-align:center;font:400 clamp(34px,5vw,58px)/1.2 Georgia,serif;margin-top:4px}.result .chg{background:var(--change-soft);border-radius:8px;padding:0 9px}
+.proofnote{margin-top:20px;padding:17px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);display:grid;grid-template-columns:auto 1fr;gap:16px;align-items:start}.proofnote strong{font:400 20px Georgia,serif}.proofnote p{margin:0;color:#4f4b46}
+details{margin-top:30px;border-bottom:1px solid var(--line);padding-bottom:24px}summary{cursor:pointer;font:400 26px Georgia,serif;list-style:none}summary::-webkit-details-marker{display:none}summary:after{content:" +";color:var(--muted)}details[open] summary:after{content:" −"}.detailslead{max-width:760px;color:#4f4b46;margin:10px 0 22px}
+.edit{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}.group{border-top:1px solid var(--line);padding-top:12px}.lab{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:12px}.rows{display:grid;gap:9px}.row{display:flex;gap:7px;align-items:center}.row .basis{min-width:27px;font:400 18px Georgia,serif}.row input{width:62px;height:38px;border:0;border-bottom:1px solid var(--line);background:transparent;text-align:center;font:500 17px Georgia,serif}.row input:focus{outline:none;border-color:var(--ink);background:#fff}.warn{min-height:20px;margin-top:12px;color:var(--bad);font-size:14px}.controls{display:flex;justify-content:flex-end;gap:18px;margin-top:10px}
+.matrices{margin-top:25px;padding-top:22px;border-top:1px solid var(--line)}.matrices h3{font:400 25px Georgia,serif;margin:0 0 6px}.matrices>p{margin:0 0 20px;color:#4f4b46}.mgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}.mwrap{display:grid;gap:8px;justify-items:center;text-align:center}.mwrap .mt{font:400 19px Georgia,serif}.mwrap .desc{font-size:13px;line-height:1.35;color:var(--muted);max-width:210px}.mat{position:relative;display:grid;gap:4px;padding:7px 12px}.mat:before,.mat:after{content:"";position:absolute;top:0;bottom:0;width:7px;border-top:1.2px solid currentColor;border-bottom:1.2px solid currentColor}.mat:before{left:0;border-left:1.2px solid currentColor}.mat:after{right:0;border-right:1.2px solid currentColor}.cell{width:61px;text-align:center;font:400 18px Georgia,serif}
+.related{display:flex;gap:20px;flex-wrap:wrap;align-items:center;margin-top:28px;padding-top:18px;border-top:1px solid var(--line);font-size:14px;color:var(--muted)}.related a{color:var(--accent);text-decoration:none}.related a:hover{text-decoration:underline}
+.dim{opacity:.28}
+@media(max-width:930px){header{grid-template-columns:1fr}.lead{grid-template-columns:1fr}.route{grid-template-columns:1fr}.arrow .glyph{transform:rotate(90deg)}.direct{grid-template-columns:1fr;gap:18px}.bridge{width:180px;margin:auto}.edit,.mgrid{grid-template-columns:1fr 1fr}.proofnote{grid-template-columns:1fr}}
+@media(max-width:600px){main{padding-left:14px;padding-right:14px}.edit,.mgrid{grid-template-columns:1fr}.steps{gap:12px}.node{min-height:118px}}
 </style>
 </head>
-<body><main>
-<header><div><div class="k" id="k"></div><h1 id="title"></h1><p id="sub"></p></div><div class="top"><a id="back"></a><button id="en" class="active">EN</button><button id="ru">RU</button></div></header>
-<section class="edit">
-<div class="group"><div class="lab" id="lt"></div><div class="rows"><div class="pair"><input id="t11" type="number" step="0.25"><input id="t12" type="number" step="0.25"></div><div class="pair"><input id="t21" type="number" step="0.25"><input id="t22" type="number" step="0.25"></div></div></div>
-<div class="group"><div class="lab" id="lu"></div><div class="rows"><div class="pair"><input id="u11" type="number" step="0.25"><input id="u21" type="number" step="0.25"></div><div class="pair"><input id="u12" type="number" step="0.25"><input id="u22" type="number" step="0.25"></div></div></div>
-<div class="group"><div class="lab" id="lv"></div><div class="rows"><div class="pair"><input id="v11" type="number" step="0.25"><input id="v21" type="number" step="0.25"></div><div class="pair"><input id="v12" type="number" step="0.25"><input id="v22" type="number" step="0.25"></div></div></div>
-<div class="group"><div class="lab" id="lx"></div><div class="rows"><div class="pair"><input id="x1" type="number" step="0.25"><input id="x2" type="number" step="0.25"></div></div></div><div class="warn" id="warn"></div>
+<body>
+<main>
+<header>
+  <div><div class="k" id="k"></div><h1 id="title"></h1></div>
+  <div class="topnav"><a id="back"></a><button id="en" class="active">EN</button><button id="ru">RU</button></div>
+</header>
+
+<section class="lead">
+  <div><h2 id="heroTitle"></h2><p id="heroSub"></p></div>
+  <div class="legend"><span class="key"><span class="dot u"></span><span id="ku"></span></span><span class="key"><span class="dot v"></span><span id="kv"></span></span></div>
 </section>
-<section class="diagram"><h2 class="q" id="q"></h2><div class="path"><div class="node"><div id="n1"></div><small id="s1"></small></div><div class="arrow"><div class="sym">→</div><div class="name">C</div></div><div class="node"><div id="n2"></div><small id="s2"></small></div><div class="arrow"><div class="sym">→</div><div class="name">B</div></div><div class="node"><div id="n3"></div><small id="s3"></small></div><div class="arrow"><div class="sym">→</div><div class="name">C⁻¹</div></div><div class="node"><div id="n4"></div><small id="s4"></small></div></div><div class="direct"><div id="dn1"></div><div class="bar"><span>A</span></div><div id="dn2"></div></div></section>
-<section class="matsec"><div class="mgrid"><div class="mwrap"><div>A = M(T,u)</div><div class="m" id="A"></div><div class="desc" id="da"></div></div><div class="mwrap"><div>B = M(T,v)</div><div class="m" id="B"></div><div class="desc" id="db"></div></div><div class="mwrap"><div>C = M(I,u,v)</div><div class="m" id="C"></div><div class="desc" id="dc"></div></div><div class="mwrap"><div>C⁻¹ = M(I,v,u)</div><div class="m" id="Ci"></div><div class="desc" id="dci"></div></div></div><div class="identity">A = <span class="c">C⁻¹</span> B <span class="c">C</span></div><div class="note" id="note"></div><div class="ingredients"><span id="uses"></span><a id="l381"></a><a id="l382"></a></div><div class="controls"><button id="preset"></button><button id="reset"></button></div></section>
+
+<div class="steps">
+  <button id="step0"></button><button id="step1"></button><button id="step2"></button><button id="step3"></button><button id="step4" class="active"></button>
+</div>
+
+<section>
+  <div class="route">
+    <div class="node u" id="node1"><div class="coord">[x]<sub>u</sub></div><div id="n1"></div><div class="caption" id="c1"></div></div>
+    <div class="arrow change" id="arrow1"><div class="glyph">→</div><div class="name">C</div><div class="why" id="a1"></div></div>
+    <div class="node v" id="node2"><div class="coord">[x]<sub>v</sub></div><div id="n2"></div><div class="caption" id="c2"></div></div>
+    <div class="arrow" id="arrow2"><div class="glyph">→</div><div class="name">B</div><div class="why" id="a2"></div></div>
+    <div class="node v" id="node3"><div class="coord">[Tx]<sub>v</sub></div><div id="n3"></div><div class="caption" id="c3"></div></div>
+    <div class="arrow change" id="arrow3"><div class="glyph">→</div><div class="name">C⁻¹</div><div class="why" id="a3"></div></div>
+    <div class="node u" id="node4"><div class="coord">[Tx]<sub>u</sub></div><div id="n4"></div><div class="caption" id="c4"></div></div>
+  </div>
+  <div class="direct">
+    <div class="node u" id="node5"><div class="coord">[x]<sub>u</sub></div><div id="dn1"></div></div>
+    <div class="bridge" id="bridgeA"><div class="name">A</div></div>
+    <div class="node u" id="node6"><div class="coord">[Tx]<sub>u</sub></div><div id="dn2"></div></div>
+  </div>
+
+  <div class="explain">
+    <div class="eyebrow" id="eyebrow"></div>
+    <div class="eq" id="eq"></div>
+    <div class="msg" id="msg"></div>
+    <div class="result" id="result"></div>
+  </div>
+
+  <div class="proofnote"><strong id="proofTitle"></strong><p id="proofText"></p></div>
+</section>
+
+<details>
+  <summary id="tryTitle"></summary>
+  <p class="detailslead" id="trySub"></p>
+  <div class="edit">
+    <div class="group"><div class="lab" id="lt"></div><div class="rows"><div class="row"><input id="t11" type="number" step="0.25"><input id="t12" type="number" step="0.25"></div><div class="row"><input id="t21" type="number" step="0.25"><input id="t22" type="number" step="0.25"></div></div></div>
+    <div class="group"><div class="lab" id="lu"></div><div class="rows"><div class="row"><span class="basis">u₁</span><input id="u11" type="number" step="0.25"><input id="u12" type="number" step="0.25"></div><div class="row"><span class="basis">u₂</span><input id="u21" type="number" step="0.25"><input id="u22" type="number" step="0.25"></div></div></div>
+    <div class="group"><div class="lab" id="lv"></div><div class="rows"><div class="row"><span class="basis">v₁</span><input id="v11" type="number" step="0.25"><input id="v12" type="number" step="0.25"></div><div class="row"><span class="basis">v₂</span><input id="v21" type="number" step="0.25"><input id="v22" type="number" step="0.25"></div></div></div>
+    <div class="group"><div class="lab" id="lx"></div><div class="rows"><div class="row"><input id="x1" type="number" step="0.25"><input id="x2" type="number" step="0.25"></div></div></div>
+  </div>
+  <div class="warn" id="warn"></div>
+  <div class="controls"><button class="plainbtn" id="preset"></button><button class="plainbtn" id="reset"></button></div>
+
+  <div class="matrices">
+    <h3 id="matTitle"></h3><p id="matSub"></p>
+    <div class="mgrid">
+      <div class="mwrap"><div class="mt">A = M(T, u)</div><div class="mat" id="A"></div><div class="desc" id="da"></div></div>
+      <div class="mwrap"><div class="mt">B = M(T, v)</div><div class="mat" id="B"></div><div class="desc" id="db"></div></div>
+      <div class="mwrap"><div class="mt">C = M(I, u, v)</div><div class="mat" id="C"></div><div class="desc" id="dc"></div></div>
+      <div class="mwrap"><div class="mt">C⁻¹ = M(I, v, u)</div><div class="mat" id="Ci"></div><div class="desc" id="dci"></div></div>
+    </div>
+  </div>
+</details>
+
+<div class="related"><span id="uses"></span><a id="l381"></a><a id="l382"></a></div>
 </main>
 <script>
-const S={en:{k:'Linear Algebra Done Right · 3.84',title:'Change-of-basis formula',sub:'The operator T is fixed. Only the coordinate language changes. Compare the direct u-coordinate route with the route that changes to v-coordinates, applies B, and changes back.',back:'← all visualizations',lt:'one fixed operator T (ambient coordinates)',lu:'basis u as columns',lv:'basis v as columns',lx:'start with [x]u',warn:'u and v must remain bases (nonzero determinant).',q:'Two coordinate routes for the same vector Tx',s1:'start: [x]u',s2:'same x, now [x]v',s3:'apply T in v-coordinates: [Tx]v',s4:'same Tx, back in u-coordinates',da:'direct u-coordinate description of T',db:'v-coordinate description of the same T',dc:'rewrite u-coordinates as v-coordinates',dci:'rewrite v-coordinates as u-coordinates',note:'Both routes start with [x]u and end with [Tx]u for every x. Therefore the matrix of the long route C⁻¹BC must equal the matrix A of the direct route.',uses:'Proof ingredients:',l381:'3.81 — matrix of a product',l382:'3.82 — inverse change-of-coordinate matrices',preset:'change basis v',reset:'reset'},ru:{k:'Linear Algebra Done Right · 3.84',title:'Формула смены базиса',sub:'Оператор T остаётся тем же. Меняется только язык координат. Сравни прямой путь в u-координатах с путём: перейти в v-координаты, применить B и вернуться обратно.',back:'← все визуализации',lt:'один фиксированный оператор T (внешние координаты)',lu:'базис u записан столбцами',lv:'базис v записан столбцами',lx:'начни с [x]u',warn:'u и v должны оставаться базисами (определитель не равен нулю).',q:'Два координатных пути к одному и тому же вектору Tx',s1:'старт: [x]u',s2:'тот же x, теперь [x]v',s3:'применяем T в v-координатах: [Tx]v',s4:'тот же Tx, возвращаемся в u-координаты',da:'прямое описание T в u-координатах',db:'описание того же T в v-координатах',dc:'переписывает u-координаты в v-координатах',dci:'переписывает v-координаты в u-координатах',note:'Оба пути для любого x начинаются с [x]u и заканчиваются [Tx]u. Поэтому матрица длинного пути C⁻¹BC обязана совпадать с матрицей A прямого пути.',uses:'В доказательстве используются:',l381:'3.81 — матрица произведения',l382:'3.82 — обратные матрицы смены координат',preset:'сменить базис v',reset:'сброс'}};
-let lang='en',presetN=0;const $=i=>document.getElementById(i);const defaults={t11:2,t12:1,t21:-1,t22:1,u11:1,u21:0,u12:0,u22:1,v11:1,v21:1,v12:-1,v22:1,x1:2,x2:-1};
-function txt(k){return S[lang][k]}function n(id){return Number($(id).value||0)}function fmt(x){if(Math.abs(x)<1e-10)x=0;const r=Math.round(x*100)/100;return Number.isInteger(r)?String(r):String(r)}function M(a,b,c,d){return [[a,b],[c,d]]}function det(A){return A[0][0]*A[1][1]-A[0][1]*A[1][0]}function inv(A){const q=det(A);return [[A[1][1]/q,-A[0][1]/q],[-A[1][0]/q,A[0][0]/q]]}function mm(A,B){return A.map((r,i)=>B[0].map((_,j)=>r.reduce((s,__,k)=>s+A[i][k]*B[k][j],0)))}function mv(A,v){return A.map(r=>r[0]*v[0]+r[1]*v[1])}function vec(v){return `<span class="vec"><span>${fmt(v[0])}</span><span>${fmt(v[1])}</span></span>`}function matrix(el,A){el.innerHTML='';el.style.gridTemplateColumns='repeat(2,66px)';A.forEach(r=>r.forEach(x=>{const s=document.createElement('span');s.className='mc';s.textContent=fmt(x);el.appendChild(s)}))}
-function render(){const T=M(n('t11'),n('t12'),n('t21'),n('t22')),U=M(n('u11'),n('u21'),n('u12'),n('u22')),V=M(n('v11'),n('v21'),n('v12'),n('v22')),x=[n('x1'),n('x2')];['k','title','sub','lt','lu','lv','lx','q','da','db','dc','dci','note','uses','preset','reset'].forEach(id=>$(id).textContent=txt(id));$('back').textContent=txt('back');$('back').href=`../index.html?lang=${lang}`;$('l381').textContent=txt('l381');$('l381').href=`../3-81/index.html?lang=${lang}`;$('l382').textContent=txt('l382');$('l382').href=`../3-82/index.html?lang=${lang}`;$('en').classList.toggle('active',lang==='en');$('ru').classList.toggle('active',lang==='ru');document.documentElement.lang=lang;const ok=Math.abs(det(U))>1e-7&&Math.abs(det(V))>1e-7;$('warn').textContent=ok?'':txt('warn');if(!ok){['A','B','C','Ci'].forEach(id=>$(id).innerHTML='—');['n1','n2','n3','n4','dn1','dn2'].forEach(id=>$(id).textContent='—');return}const Ui=inv(U),Vi=inv(V),A=mm(mm(Ui,T),U),B=mm(mm(Vi,T),V),C=mm(Vi,U),Ci=mm(Ui,V);const xv=mv(C,x),txv=mv(B,xv),txu=mv(Ci,txv),direct=mv(A,x);matrix($('A'),A);matrix($('B'),B);matrix($('C'),C);matrix($('Ci'),Ci);$('n1').innerHTML=vec(x);$('n2').innerHTML=vec(xv);$('n3').innerHTML=vec(txv);$('n4').innerHTML=vec(txu);$('dn1').innerHTML=vec(x);$('dn2').innerHTML=vec(direct);$('s1').textContent=txt('s1');$('s2').textContent=txt('s2');$('s3').textContent=txt('s3');$('s4').textContent=txt('s4')}
-function detect(){const q=new URLSearchParams(location.search).get('lang');if(q==='ru'||q==='en')lang=q;else if(navigator.language.toLowerCase().startsWith('ru'))lang='ru'}function reset(){Object.entries(defaults).forEach(([k,v])=>$(k).value=v);presetN=0;render()}function preset(){presetN=(presetN+1)%3;const sets=[[[1,1],[-1,1]],[[2,-1],[1,1]],[[1,2],[1,-1]]],s=sets[presetN];$('v11').value=s[0][0];$('v21').value=s[0][1];$('v12').value=s[1][0];$('v22').value=s[1][1];render()}
-['t11','t12','t21','t22','u11','u21','u12','u22','v11','v21','v12','v22','x1','x2'].forEach(id=>$(id).oninput=render);$('en').onclick=()=>{lang='en';render()};$('ru').onclick=()=>{lang='ru';render()};$('reset').onclick=reset;$('preset').onclick=preset;detect();reset();
+const S={
+ en:{
+  k:'Linear Algebra Done Right · 3.84',title:'Change-of-basis formula',back:'← all visualizations',
+  heroTitle:'Two coordinate routes, one linear operator',heroSub:'The vector and the operator do not change. Only the coordinate language changes. Follow the upper route through v-coordinates and compare it with the direct u-coordinate route.',ku:'u-coordinates',kv:'v-coordinates',
+  step0:'start',step1:'rewrite in v',step2:'apply T',step3:'rewrite in u',step4:'compare',
+  c1:'start in u-coordinates',c2:'the same x, written in v-coordinates',c3:'the same Tx, written in v-coordinates',c4:'the same Tx, written in u-coordinates',
+  a1:'change coordinates',a2:'apply T in basis v',a3:'change coordinates back',eyebrow:'what is happening',
+  m0:'Both routes start from the same coordinate vector.',m1:'C does not move x. It rewrites the coordinates of the same vector from the u-basis into the v-basis.',m2:'B is the matrix of the same operator T, but in the v-basis. It turns [x]v into [Tx]v.',m3:'C⁻¹ again changes only the coordinate description, rewriting [Tx]v as [Tx]u.',m4:'For every x, the upper route and the direct route have exactly the same input and output. Therefore their matrices are equal.',
+  proofTitle:'Why this is a proof',proofText:'The diagram is not relying on this one numerical example. The two routes represent linear maps from u-coordinate vectors to u-coordinate vectors. Because they agree on every x, the linear maps are equal; by 3.81 the upper route has matrix C⁻¹BC, while the lower route has matrix A.',
+  tryTitle:'Try a concrete 2D example',trySub:'The proof above is basis-independent. This playground only gives numbers to the same mechanism. T is entered in the standard basis e; u and v are two bases written in e-coordinates.',
+  lt:'T in the standard basis e',lu:'basis u (vectors in e-coordinates)',lv:'basis v (vectors in e-coordinates)',lx:'starting coordinates [x]u',warn:'u and v must remain bases, so both determinants must be nonzero.',preset:'change basis v',reset:'reset example',
+  matTitle:'Matrices generated by the example',matSub:'They are computed independently from T and the two bases; the equality A = C⁻¹BC is then visible in the two routes above.',da:'T described in u-coordinates',db:'the same T described in v-coordinates',dc:'u-coordinates → v-coordinates',dci:'v-coordinates → u-coordinates',
+  uses:'Proof ingredients:',l381:'3.81 — matrix of a product',l382:'3.82 — inverse coordinate-change matrices'
+ },
+ ru:{
+  k:'Linear Algebra Done Right · 3.84',title:'Формула смены базиса',back:'← все визуализации',
+  heroTitle:'Два координатных пути, один линейный оператор',heroSub:'Сам вектор и оператор не меняются. Меняется только язык координат. Пройди верхний путь через v-координаты и сравни его с прямым путём в u-координатах.',ku:'u-координаты',kv:'v-координаты',
+  step0:'старт',step1:'переписать в v',step2:'применить T',step3:'переписать в u',step4:'сравнить',
+  c1:'начинаем в u-координатах',c2:'тот же x, записанный в v-координатах',c3:'тот же Tx, записанный в v-координатах',c4:'тот же Tx, записанный в u-координатах',
+  a1:'смена координат',a2:'применяем T в базисе v',a3:'меняем координаты обратно',eyebrow:'что происходит',
+  m0:'Оба пути начинаются с одного и того же координатного вектора.',m1:'C не двигает x. Она лишь переписывает координаты того же вектора из базиса u в базис v.',m2:'B — матрица того же оператора T, но в базисе v. Она переводит [x]v в [Tx]v.',m3:'C⁻¹ снова меняет только описание координат: переписывает [Tx]v как [Tx]u.',m4:'Для любого x верхний и прямой пути имеют одинаковый вход и одинаковый выход. Значит, их матрицы равны.',
+  proofTitle:'Почему это доказательство',proofText:'Диаграмма не опирается на один численный пример. Оба пути задают линейные отображения из u-координат в u-координаты. Они совпадают для любого x, значит сами отображения равны; по 3.81 матрица верхнего пути равна C⁻¹BC, а матрица нижнего пути равна A.',
+  tryTitle:'Попробуй конкретный двумерный пример',trySub:'Доказательство выше не зависит от размерности. Здесь мы только подставляем числа в тот же механизм. T задаётся в стандартном базисе e; u и v — два базиса, записанные в e-координатах.',
+  lt:'T в стандартном базисе e',lu:'базис u (векторы в e-координатах)',lv:'базис v (векторы в e-координатах)',lx:'начальные координаты [x]u',warn:'u и v должны оставаться базисами: оба определителя должны быть ненулевыми.',preset:'сменить базис v',reset:'сбросить пример',
+  matTitle:'Матрицы, полученные в примере',matSub:'Они независимо вычисляются из T и двух базисов; после этого равенство A = C⁻¹BC видно по двум путям выше.',da:'T в u-координатах',db:'тот же T в v-координатах',dc:'u-координаты → v-координаты',dci:'v-координаты → u-координаты',
+  uses:'В доказательстве используются:',l381:'3.81 — матрица произведения',l382:'3.82 — обратные матрицы смены координат'
+ }
+};
+let lang='en',step=4,presetN=0;
+const $=id=>document.getElementById(id);
+const ids=['t11','t12','t21','t22','u11','u12','u21','u22','v11','v12','v21','v22','x1','x2'];
+const defaults={t11:2,t12:1,t21:-1,t22:1,u11:1,u12:0,u21:0,u22:1,v11:1,v12:-1,v21:1,v22:1,x1:2,x2:-1};
+function txt(k){return S[lang][k]}
+function n(id){return Number($(id).value||0)}
+function fmt(x){if(Math.abs(x)<1e-10)x=0;const r=Math.round(x*100)/100;return Number.isInteger(r)?String(r):String(r)}
+function M(a,b,c,d){return [[a,b],[c,d]]}
+function det(A){return A[0][0]*A[1][1]-A[0][1]*A[1][0]}
+function inv(A){const q=det(A);return [[A[1][1]/q,-A[0][1]/q],[-A[1][0]/q,A[0][0]/q]]}
+function mm(A,B){return A.map((r,i)=>B[0].map((_,j)=>r.reduce((s,__,k)=>s+A[i][k]*B[k][j],0)))}
+function mv(A,v){return A.map(r=>r[0]*v[0]+r[1]*v[1])}
+function vec(v){return `<span class="vec"><span>${fmt(v[0])}</span><span>${fmt(v[1])}</span></span>`}
+function matrix(el,A){el.innerHTML='';el.style.gridTemplateColumns='repeat(2,61px)';A.forEach(r=>r.forEach(x=>{const s=document.createElement('span');s.className='cell';s.textContent=fmt(x);el.appendChild(s)}))}
+function setStatic(){
+ ['k','title','heroTitle','heroSub','ku','kv','step0','step1','step2','step3','step4','c1','c2','c3','c4','a1','a2','a3','eyebrow','proofTitle','proofText','tryTitle','trySub','lt','lu','lv','lx','preset','reset','matTitle','matSub','da','db','dc','dci','uses'].forEach(id=>$(id).textContent=txt(id));
+ $('back').textContent=txt('back');$('back').href=`../index.html?lang=${lang}`;
+ $('l381').textContent=txt('l381');$('l381').href=`../3-81/index.html?lang=${lang}`;
+ $('l382').textContent=txt('l382');$('l382').href=`../3-82/index.html?lang=${lang}`;
+ $('en').classList.toggle('active',lang==='en');$('ru').classList.toggle('active',lang==='ru');
+ [0,1,2,3,4].forEach(i=>$('step'+i).classList.toggle('active',step===i));document.documentElement.lang=lang;
+}
+function focus(active){
+ const all=['node1','node2','node3','node4','node5','node6','arrow1','arrow2','arrow3','bridgeA'];
+ all.forEach(id=>{$(id).classList.remove('focus','dim')});
+ if(step!==4)all.forEach(id=>{if(!active.includes(id))$(id).classList.add('dim')});
+ active.forEach(id=>$(id).classList.add('focus'));
+}
+function render(){
+ setStatic();
+ const T=M(n('t11'),n('t12'),n('t21'),n('t22'));
+ const U=M(n('u11'),n('u21'),n('u12'),n('u22'));
+ const V=M(n('v11'),n('v21'),n('v12'),n('v22'));
+ const xu=[n('x1'),n('x2')];
+ const ok=Math.abs(det(U))>1e-8&&Math.abs(det(V))>1e-8;
+ if(!ok){$('warn').textContent=txt('warn');['n1','n2','n3','n4','dn1','dn2'].forEach(id=>$(id).innerHTML='—');['A','B','C','Ci'].forEach(id=>$(id).innerHTML='—');$('eq').innerHTML='—';$('msg').textContent='';$('result').innerHTML='';focus([]);return}
+ $('warn').textContent='';
+ const Uinv=inv(U),Vinv=inv(V),xStd=mv(U,xu),xv=mv(Vinv,xStd),TxStd=mv(T,xStd),Txv=mv(Vinv,TxStd),Txu=mv(Uinv,TxStd);
+ const A=mm(Uinv,mm(T,U)),B=mm(Vinv,mm(T,V)),C=mm(Vinv,U),Ci=mm(Uinv,V);
+ $('n1').innerHTML=vec(xu);$('n2').innerHTML=vec(xv);$('n3').innerHTML=vec(Txv);$('n4').innerHTML=vec(Txu);$('dn1').innerHTML=vec(xu);$('dn2').innerHTML=vec(Txu);
+ matrix($('A'),A);matrix($('B'),B);matrix($('C'),C);matrix($('Ci'),Ci);
+ let eq='',msg='',active=[];
+ if(step===0){eq='[x]<sub>u</sub>';msg=txt('m0');active=['node1','node5']}
+ if(step===1){eq='[x]<sub>v</sub> = C[x]<sub>u</sub>';msg=txt('m1');active=['node1','arrow1','node2']}
+ if(step===2){eq='[Tx]<sub>v</sub> = B[x]<sub>v</sub>';msg=txt('m2');active=['node2','arrow2','node3']}
+ if(step===3){eq='[Tx]<sub>u</sub> = C⁻¹[Tx]<sub>v</sub>';msg=txt('m3');active=['node3','arrow3','node4']}
+ if(step===4){eq='[Tx]<sub>u</sub> = C⁻¹BC[x]<sub>u</sub> = A[x]<sub>u</sub>';msg=txt('m4');active=['node1','arrow1','node2','arrow2','node3','arrow3','node4','node5','bridgeA','node6']}
+ $('eq').innerHTML=eq;$('msg').textContent=msg;$('result').innerHTML=step===4?'A = <span class="chg">C⁻¹</span> B <span class="chg">C</span>':'';focus(active);
+}
+function detect(){const q=new URLSearchParams(location.search).get('lang');if(q==='ru'||q==='en')lang=q;else if(navigator.language.toLowerCase().startsWith('ru'))lang='ru'}
+function reset(){Object.entries(defaults).forEach(([k,v])=>$(k).value=v);step=4;presetN=0;render()}
+function preset(){presetN=(presetN+1)%3;const sets=[{v11:1,v12:-1,v21:1,v22:1},{v11:2,v12:1,v21:-1,v22:1},{v11:1,v12:2,v21:1,v22:-1}],s=sets[presetN];Object.entries(s).forEach(([k,v])=>$(k).value=v);render()}
+ids.forEach(id=>$(id).addEventListener('input',render));
+$('en').onclick=()=>{lang='en';render()};$('ru').onclick=()=>{lang='ru';render()};[0,1,2,3,4].forEach(i=>$('step'+i).onclick=()=>{step=i;render()});$('preset').onclick=preset;$('reset').onclick=reset;detect();reset();
 </script>
-</body></html>
+</body>
+</html>
