@@ -66,18 +66,44 @@ Rules:
 
 When adding a numbered Axler visualization:
 
-1. Create a new folder with its own `index.html`.
-2. Follow `skills/math-visualization/SKILL.md` when designing the interaction.
-3. Add the visualization to the root menu.
-4. Add both English and Russian interface copy.
-5. Add one entry to `social-previews.json` containing only `number` and `title`.
-6. Add a back link to the root menu.
-7. Preserve the selected language when navigating between the menu and the visualization.
-8. Re-read all changed files after writing them and verify the expected version is on `main`.
+1. Verify the theorem statement, notation, and intended mathematical point from Axler or the user-provided source material.
+2. Research the theorem/idea before designing the page: find and inspect at least two high-quality external explanations or visual references so the interaction is informed by how the idea is usually explained, what learners commonly miss, and which representation best exposes the mechanism.
+3. Decide what single mathematical relationship the visualization should make obvious, then follow `skills/math-visualization/SKILL.md` when designing the interaction.
+4. Create a new folder with its own `index.html`.
+5. Add the visualization to the root menu.
+6. Add both English and Russian interface copy.
+7. Add one entry to `social-previews.json` containing only `number` and `title`.
+8. Add a back link to the root menu.
+9. Preserve the selected language when navigating between the menu and the visualization.
+10. Render the finished page and capture at least one screenshot for visual QA. Prefer both a normal desktop viewport and a narrow/mobile viewport when the available browser tooling supports it.
+11. Inspect the screenshot(s) rather than relying only on source code. Check for text overlap, clipped equations, broken wrapping, awkward empty space, misleading arrows/alignment, poor hierarchy, and responsive failures; iterate if anything looks wrong.
+12. Re-read all changed files after writing them and verify the expected version is on `main`.
 
 The preview generator derives the folder path, image filename, and `AXLER <number>` label from the theorem number. For example, `3.84` maps to `3-84/index.html` and `assets/social/3-84.png`.
 
-A new numbered visualization is not complete until it is reachable from the root menu and represented in `social-previews.json`.
+A new numbered visualization is not complete until it is reachable from the root menu, represented in `social-previews.json`, and visually inspected from a rendered screenshot. If the current environment genuinely cannot render or capture the page, state that limitation explicitly instead of claiming screenshot-based visual QA was completed.
+
+## Research before visualization
+
+External references are part of the design process, not decoration added afterwards.
+
+- Start from Axler or the exact theorem/exercise supplied by the user; external sources are supplementary, not a replacement for the source statement.
+- Search for at least two strong references that explain the same theorem, construction, or underlying idea. Prefer textbooks, university lecture notes, reputable mathematical expositions, or particularly clear interactive explanations.
+- Use references to understand the theorem's conceptual mechanism, useful equivalent viewpoints, standard notation, common learner confusions, and promising visual representations.
+- When useful, look at existing diagrams or interactive explanations for inspiration, but do not copy distinctive prose, artwork, or page design. Rebuild the explanation in this repository's own visual language.
+- If references disagree on conventions, follow Axler's notation and make any convention change explicit.
+- Keep the final page focused: research may be broad, but the visualization should still isolate one relationship rather than becoming a survey of everything found.
+
+## Screenshot-based visual QA
+
+Source inspection is not enough for visual work. Before considering a visualization finished:
+
+- Render the actual page in a browser and capture a screenshot.
+- Inspect the rendered result at the viewport size used for the screenshot; do not assume CSS intent matches browser output.
+- Prefer a second narrow/mobile screenshot for pages with dense equations, matrices, controls, or side-by-side layouts.
+- Check typography, spacing, line wrapping, equation/matrix alignment, arrows, selection states, color semantics, control placement, and whether the main mathematical relation is visually dominant.
+- Actively look for collisions and accidental layering such as text-on-text, labels over arrows, content underneath fixed elements, or overflowing SVG/math.
+- If the first screenshot reveals a problem, fix it and capture another screenshot. Do not ship a known visual defect merely because the HTML/CSS is technically valid.
 
 ## Social previews
 
